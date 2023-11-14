@@ -30,6 +30,9 @@ sources:
         columns:
           - name: date_date
             description: date of purchase / aggregation by date for daily granularity
+            tests:
+              - not_null
+              
           - name: orders_id
             description: foreign key to ship
             tests:
