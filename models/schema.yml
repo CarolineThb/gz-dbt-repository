@@ -1,8 +1,8 @@
 version: 2
 
 sources:
-  - name: gz_raw_data
-    schema: raw
+  - name: raw
+    schema: gz_raw_data
     description: greenweez database for finance analysis
     tables:
       - name: product
