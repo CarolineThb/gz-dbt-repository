@@ -43,3 +43,9 @@ models:
       finance:
         schema: finance
 
+    Circle_parcel:
+      +materialized: table
+      staging:
+        schema: parcel_dbt_dev
+      
+

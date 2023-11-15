@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw_data_circle
+    description: circle datasource
+    tables:
+      - name: cc_parcel
+        identifier: raw_cc_parcel
+      
+      - name: cc_parcel_product
+        identifier: raw_cc_parcel_product
