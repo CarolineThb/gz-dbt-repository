@@ -32,7 +32,7 @@ sources:
             description: date of purchase / aggregation by date for daily granularity
             tests:
               - not_null
-              
+
           - name: orders_id
             description: foreign key to ship
             tests:
@@ -76,5 +76,111 @@ sources:
 
           - name: ship_cost
             description: to calculate operational margin
+            tests:
+              - not_null
+
+      - name: adwords
+        identifier: raw_gz_adwords
+        columns:
+          - name: date_date
+
+          - name: paid_source
+
+          - name: campaign_key
+            description: to transform to INT
+            tests:
+              - not_null
+
+          - name: camPGN_name
+            description: change the name to campaign_name
+
+          - name: ads_cost
+            description: STRING to change to FLOAT
+
+          - name: impression
+
+          - name: click
+
+      - name: bing
+        identifier: raw_gz_bing
+        columns:
+          - name: date_date
+
+          - name: paid_source
+
+          - name: campaign_key
+            description: = campaign name
+            tests:
+              - not_null
+
+          - name: camPGN_name
+            description: change the name to campaign_name
+
+          - name: ads_cost
+            description: STRING to change to FLOAT
+            tests:
+              - not_null
+
+          - name: impression
+            tests:
+              - not_null
+
+          - name: click
+            tests:
+              - not_null
+
+      - name: criteo
+        identifier: raw_gz_criteo
+        columns:
+          - name: date_date
+
+          - name: paid_source
+
+          - name: campaign_key
+            description: = camPGN_name
+            tests:
+              - not_null
+
+          - name: camPGN_name
+            description: change the name to campaign_name
+
+          - name: ads_cost
+            description: STRING to change to FLOAT
+            tests:
+              - not_null
+
+          - name: impression
+            tests:
+              - not_null
+
+          - name: click
+            tests:
+              - not_null
+
+      - name: facebook
+        identifier: raw_gz_facebook
+        columns:
+          - name: date_date
+
+          - name: paid_source
+
+          - name: campaign_key
+            description: change to INT
+            tests:
+              - not_null
+
+          - name: camPGN_name
+            description: change the name to campaign_name
+
+          - name: ads_cost
+            description: STRING to change to FLOAT
+            tests:
+              - not_null
+
+          - name: impression
+            tests:
+              - not_null
+
+          - name: click
             tests:
               - not_null
