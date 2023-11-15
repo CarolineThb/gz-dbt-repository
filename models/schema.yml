@@ -1,0 +1,80 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: gz_raw_data
+    description: greenweez raw datasource for finance analysis
+    tables:
+      - name: product
+        identifier: raw_gz_product
+        columns:
+          - name: products_id
+            description: primary key of the table
+            tests:
+              - unique
+              - not_null
+          - name: purchSE_PRICE
+            description: to LOWER column title
+            tests:
+              - not_null
+
+      - name: sales
+        identifier: raw_gz_sales
+        description: no primary key in table - to make a combination of two colomns to generate a PK
+        freshness:
+          warn_after:
+            count: 90
+            period: day
+        loaded_at_field: "CAST(date_date AS TIMESTAMP)"
+
+        columns:
+          - name: date_date
+            description: date of purchase / aggregation by date for daily granularity
+            tests:
+              - not_null
+              
+          - name: orders_id
+            description: foreign key to ship
+            tests:
+              - not_null
+          - name: pdt_id
+            description: foreign key to product
+            tests:
+              - not_null
+          - name: revenue
+            description: to calculate daily turnover, margin and operational margin
+            tests:
+              - not_null
+          - name: quantity
+            tests:
+              - not_null
+        tests:
+          - unique:
+              column_name: '(orders_id || "_" || pdt_id)'
+
+      - name: ship
+        identifier: raw_gz_ship
+        columns:
+          - name: orders_id
+            description: primary key for the table
+            tests:
+              - unique
+              - not_null
+
+          - name: shipping_fee
+            description: to calculate turnover
+            tests:
+              - not_null
+
+          - name: shipping_fee_1
+            description: double to clean
+
+          - name: logCost
+            description: to LOWER column title // to calculate operational margin
+            tests:
+              - not_null
+
+          - name: ship_cost
+            description: to calculate operational margin
+            tests:
+              - not_null
